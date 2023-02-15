@@ -4,7 +4,8 @@
     "license": "MIT",
     "keywords": [
         "php",
-        "hyperf"
+        "hyperf",
+        "memcached"
     ],
     "description": "",
     "autoload": {
@@ -18,7 +19,12 @@
         }
     },
     "require": {
-        "php": ">=8.0"
+        "php": ">=8.0",
+        "hyperf/context": "^3.0",
+        "hyperf/contract": "^3.0",
+        "hyperf/di": "^3.0",
+        "hyperf/pool": "^3.0",
+        "ext-memcached": "*"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",

@@ -17,6 +17,7 @@ class ConfigProvider
     {
         return [
             'dependencies' => [
+                \Memcached::class => Memcached::class,
             ],
             'commands' => [
             ],
@@ -25,6 +26,14 @@ class ConfigProvider
                     'paths' => [
                         __DIR__,
                     ],
+                ],
+            ],
+            'publish' => [
+                [
+                    'id' => 'memcached',
+                    'description' => 'The config for memcached.',
+                    'source' => __DIR__ . '/../publish/memcached.php',
+                    'destination' => BASE_PATH . '/config/autoload/memcached.php',
                 ],
             ],
         ];
