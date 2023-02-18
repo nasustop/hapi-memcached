@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 /**
- * This file is part of HapiBase.
+ * This file is part of Hapi.
  *
  * @link     https://www.nasus.top
  * @document https://wiki.nasus.top
