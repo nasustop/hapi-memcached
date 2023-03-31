@@ -23,9 +23,9 @@ class MemcachedFactory
 
     public function __construct(ConfigInterface $config)
     {
-        $redisConfig = $config->get('memcached');
+        $memcachedConfig = $config->get('memcached');
 
-        foreach ($redisConfig as $poolName => $item) {
+        foreach ($memcachedConfig as $poolName => $item) {
             $this->proxies[$poolName] = make(MemcachedProxy::class, ['pool' => $poolName]);
         }
     }

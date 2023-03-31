@@ -11,7 +11,10 @@
     "autoload": {
         "psr-4": {
             "Nasustop\\HapiMemcached\\": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

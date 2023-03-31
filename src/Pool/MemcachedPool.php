@@ -45,7 +45,6 @@ class MemcachedPool extends Pool
 
     protected function createConnection(): ConnectionInterface
     {
-        // TODO: Implement createConnection() method.
         return new MemcachedConnection($this->container, $this, $this->config);
     }
 }

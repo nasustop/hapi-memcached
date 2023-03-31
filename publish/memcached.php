@@ -14,8 +14,8 @@ return [
         'host' => env('MEMCACHED_HOST', 'localhost'),
         'port' => (int) env('MEMCACHED_PORT', 11211),
         'pool' => [
-            'min_connections' => 1,
-            'max_connections' => 10,
+            'min_connections' => swoole_cpu_num(),
+            'max_connections' => swoole_cpu_num() * 2,
             'connect_timeout' => 10.0,
             'wait_timeout' => 3.0,
             'heartbeat' => -1,
