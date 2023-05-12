@@ -22,9 +22,8 @@ use Psr\Container\NotFoundExceptionInterface;
 class MemcachedConnection extends Connection
 {
     protected array $config = [
-        'host' => 'localhost',
-        'port' => 11211,
-        'auth' => null,
+        'servers' => [],
+        'options' => [],
         'pool' => [
             'min_connections' => 1,
             'max_connections' => 10,
@@ -73,10 +72,21 @@ class MemcachedConnection extends Connection
 
     public function reconnect(): bool
     {
-        $host = $this->config['host'];
-        $port = $this->config['port'];
         $memcached = new \Memcached();
-        $memcached->addServer($host, $port);
+        if (! empty($this->config['username']) && ! empty($this->config['password'])) {
+            $memcached->setOption(\Memcached::OPT_BINARY_PROTOCOL, true);
+            $memcached->setSaslAuthData($this->config['username'], $this->config['password']);
+        }
+
+        if (! empty($this->config['options']) && is_array($this->config['options']) && count($this->config['options'])) {
+            $memcached->setOptions($this->config['options']);
+        }
+
+        if (empty($memcached->getServerList())) {
+            foreach ($this->config['servers'] as $server) {
+                $memcached->addServer($server['host'], $server['port'], $server['weight'] ?? 100);
+            }
+        }
 
         $this->connection = $memcached;
         $this->lastUseTime = microtime(true);

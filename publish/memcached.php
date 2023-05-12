@@ -11,8 +11,16 @@ declare(strict_types=1);
  */
 return [
     'default' => [
-        'host' => env('MEMCACHED_HOST', 'localhost'),
-        'port' => (int) env('MEMCACHED_PORT', 11211),
+        'servers' => [
+            [
+                'host' => env('MEMCACHED_HOST', 'localhost'),
+                'port' => (int) env('MEMCACHED_PORT', 11211),
+                'weight' => (int) env('MEMCACHED_WEIGHT', 100),
+            ],
+        ],
+        'username' => env('MEMCACHED_USERNAME', ''),
+        'password' => env('MEMCACHED_PASSWORD', ''),
+        'options' => [],
         'pool' => [
             'min_connections' => swoole_cpu_num(),
             'max_connections' => swoole_cpu_num() * 2,
