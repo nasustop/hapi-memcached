@@ -23,10 +23,10 @@
     },
     "require": {
         "php": ">=8.0",
-        "hyperf/context": "^3.0",
-        "hyperf/contract": "^3.0",
-        "hyperf/di": "^3.0",
-        "hyperf/pool": "^3.0",
+        "hyperf/context": "^2.2",
+        "hyperf/contract": "^2.2",
+        "hyperf/di": "^2.2",
+        "hyperf/pool": "^2.2",
         "ext-memcached": "*"
     },
     "require-dev": {
