@@ -2,6 +2,7 @@
     "name": "nasustop/hapi-memcached",
     "type": "library",
     "license": "MIT",
+    "version": "2.2.1",
     "keywords": [
         "php",
         "hyperf",
