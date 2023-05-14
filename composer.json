@@ -2,7 +2,7 @@
     "name": "nasustop/hapi-memcached",
     "type": "library",
     "license": "MIT",
-    "version": "3.0.1",
+    "version": "3.0.2",
     "keywords": [
         "php",
         "hyperf",
@@ -24,10 +24,10 @@
     },
     "require": {
         "php": ">=8.0",
-        "hyperf/context": "^2.2",
-        "hyperf/contract": "^2.2",
-        "hyperf/di": "^2.2",
-        "hyperf/pool": "^2.2",
+        "hyperf/context": "^3.0",
+        "hyperf/contract": "^3.0",
+        "hyperf/di": "^3.0",
+        "hyperf/pool": "^3.0",
         "ext-memcached": "*"
     },
     "require-dev": {
