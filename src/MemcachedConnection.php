@@ -11,10 +11,10 @@ declare(strict_types=1);
  */
 namespace Nasustop\HapiMemcached;
 
-use Hyperf\Contract\PoolInterface;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Pool\Connection;
 use Hyperf\Pool\Exception\ConnectionException;
+use Hyperf\Pool\Pool;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -35,7 +35,7 @@ class MemcachedConnection extends Connection
 
     protected \Memcached $connection;
 
-    public function __construct(ContainerInterface $container, PoolInterface $pool, array $config)
+    public function __construct(ContainerInterface $container, Pool $pool, array $config)
     {
         parent::__construct($container, $pool);
         $this->config = array_replace_recursive($this->config, $config);
@@ -83,8 +83,10 @@ class MemcachedConnection extends Connection
         }
 
         if (empty($memcached->getServerList())) {
-            foreach ($this->config['servers'] as $server) {
-                $memcached->addServer($server['host'], $server['port'], $server['weight'] ?? 100);
+            $servers = explode(',', $this->config['servers']);
+            foreach ($servers as $server) {
+                $server = explode(':', $server);
+                $memcached->addServers($server[0], intval($server[1] ?? 11211), intval($server[2] ?? 100));
             }
         }
 
