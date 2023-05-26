@@ -32,10 +32,10 @@ class PoolFactory
         }
 
         if ($this->container instanceof Container) {
-            $pool = $this->container->make(MemcachedPool::class, ['name' => $name]);
+            $this->pools[$name] = $this->container->make(MemcachedPool::class, ['name' => $name]);
         } else {
-            $pool = new MemcachedPool($this->container, $name);
+            $this->pools[$name] = new MemcachedPool($this->container, $name);
         }
-        return $this->pools[$name] = $pool;
+        return $this->pools[$name];
     }
 }
