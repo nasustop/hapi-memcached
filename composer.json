@@ -2,7 +2,7 @@
     "name": "nasustop/hapi-memcached",
     "type": "library",
     "license": "MIT",
-    "version": "3.0.4",
+    "version": "3.0.5",
     "keywords": [
         "php",
         "hyperf",
@@ -27,15 +27,15 @@
         "hyperf/context": "^3.0",
         "hyperf/contract": "^3.0",
         "hyperf/di": "^3.0",
-        "hyperf/pool": "^3.0",
-        "ext-memcached": "*"
+        "hyperf/pool": "^3.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",
         "mockery/mockery": "^1.0",
         "phpstan/phpstan": "^1.0",
         "phpunit/phpunit": ">=7.0",
-        "swoole/ide-helper": "^4.5"
+        "swoole/ide-helper": "^4.5",
+        "ext-memcached": "*"
     },
     "suggest": {
         "swow/swow": "Required to create swow components."
