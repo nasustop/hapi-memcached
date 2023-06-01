@@ -83,11 +83,13 @@ class MemcachedConnection extends Connection
         }
 
         if (empty($memcached->getServerList())) {
-            $servers = explode(',', $this->config['servers']);
-            foreach ($servers as $server) {
-                $server = explode(':', $server);
-                $memcached->addServer($server[0], intval($server[1] ?? 11211), intval($server[2] ?? 100));
-            }
+            $servers = array_map(function ($value) {
+                $data = explode(':', $value);
+                $data[1] = intval($data[1] ?? 11211);
+                $data[2] = intval($data[2] ?? 100);
+                return $data;
+            }, explode(',', $this->config['servers']));
+            $memcached->addServers($servers);
         }
 
         $this->connection = $memcached;
