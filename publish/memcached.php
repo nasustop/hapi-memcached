@@ -11,9 +11,10 @@ declare(strict_types=1);
  */
 return [
     'default' => [
-        'servers' => env('MEMCACHED_SERVERS', env('MEMCACHED_HOST', '127.0.0.1:11211:100')),
+        'servers' => env('MEMCACHED_SERVERS', env('MEMCACHED_SERVERS', '127.0.0.1:11211:100')),
         'username' => env('MEMCACHED_USERNAME', ''),
         'password' => env('MEMCACHED_PASSWORD', ''),
+        'enable_rand_server' => false,
         'options' => [],
         'pool' => [
             'min_connections' => swoole_cpu_num(),

@@ -43,6 +43,15 @@ class MemcachedPool extends Pool
         return $this->name;
     }
 
+    public function setConfig($server): self
+    {
+        $enable_rand_server = $this->config['enable_rand_server'] ?? false;
+        if ($enable_rand_server) {
+            $this->config['servers'] = $server;
+        }
+        return $this;
+    }
+
     protected function createConnection(): ConnectionInterface
     {
         return new MemcachedConnection($this->container, $this, $this->config);

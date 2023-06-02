@@ -22,6 +22,10 @@ class Memcached
 {
     protected string $poolName = 'default';
 
+    protected bool $enable_rand_server = false;
+
+    protected string $server = '';
+
     public function __construct(protected PoolFactory $factory)
     {
     }
@@ -52,6 +56,24 @@ class Memcached
     }
 
     /**
+     * set EnableRandServer.
+     */
+    public function setEnableRandServer(bool $enable_rand_server): self
+    {
+        $this->enable_rand_server = $enable_rand_server;
+        return $this;
+    }
+
+    /**
+     * set Server.
+     */
+    public function setServer(string $server): self
+    {
+        $this->server = $server;
+        return $this;
+    }
+
+    /**
      * Get a connection from coroutine context, or from redis connection pool.
      * @param mixed $hasContextConnection
      */
@@ -62,7 +84,14 @@ class Memcached
             $connection = Context::get($this->getContextKey());
         }
         if (! $connection instanceof MemcachedConnection) {
-            $pool = $this->factory->getPool($this->poolName);
+            if ($this->enable_rand_server && ! empty($this->server)) {
+                $pool = $this->factory
+                    ->setEnableRandServer($this->enable_rand_server)
+                    ->setServer($this->server)
+                    ->getPool($this->poolName);
+            } else {
+                $pool = $this->factory->getPool($this->poolName);
+            }
             $connection = $pool->get();
         }
         if (! $connection instanceof MemcachedConnection) {
@@ -76,6 +105,9 @@ class Memcached
      */
     private function getContextKey(): string
     {
+        if ($this->enable_rand_server && ! empty($this->server)) {
+            return sprintf('memcached.connection.%s.%s', $this->poolName, $this->server);
+        }
         return sprintf('memcached.connection.%s', $this->poolName);
     }
 }
