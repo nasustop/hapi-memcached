@@ -114,7 +114,8 @@ class MemcachedConnection extends Connection
      */
     protected function retry($name, $arguments, \Throwable $exception)
     {
-        $logger = $this->container->get(StdoutLoggerInterface::class);
+        /* @var $logger StdoutLoggerInterface */
+        $logger = make(StdoutLoggerInterface::class);
         $logger->warning('Memcached::__call failed, because ' . $exception->getMessage());
 
         try {

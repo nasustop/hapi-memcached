@@ -24,7 +24,8 @@ class MemcachedPool extends Pool
 
     public function __construct(ContainerInterface $container, protected string $name)
     {
-        $config = $container->get(ConfigInterface::class);
+        /* @var $config ConfigInterface */
+        $config = make(ConfigInterface::class);
         $key = sprintf('memcached.%s', $this->name);
         if (! $config->has($key)) {
             throw new \InvalidArgumentException(sprintf('config[%s] is not exist!', $key));

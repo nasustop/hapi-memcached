@@ -9,16 +9,17 @@ declare(strict_types=1);
  * @contact  xupengfei@xupengfei.net
  * @license  https://github.com/nasustop/hapi-memcached/blob/master/LICENSE
  */
+
+use Nasustop\HapiMemcached\MemcachedFactory;
+
 if (! function_exists('memcached')) {
     /**
      * 获取memcached连接.
      */
     function memcached(string $pool = 'default'): Nasustop\HapiMemcached\MemcachedProxy
     {
-        try {
-            return \Hyperf\Utils\ApplicationContext::getContainer()->get(\Nasustop\HapiMemcached\MemcachedFactory::class)->get($pool);
-        } catch (\Psr\Container\NotFoundExceptionInterface|\Psr\Container\ContainerExceptionInterface $e) {
-            return make(\Nasustop\HapiMemcached\MemcachedFactory::class)->get($pool);
-        }
+        /* @var $memcached MemcachedFactory */
+        $memcached = make(MemcachedFactory::class);
+        return $memcached->get($pool);
     }
 }
