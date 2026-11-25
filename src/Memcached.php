@@ -16,6 +16,8 @@ use Hyperf\Context\Context;
 use Nasustop\HapiMemcached\Exception\InvalidMemcachedConnectionException;
 use Nasustop\HapiMemcached\Pool\PoolFactory;
 
+use function Hyperf\Coroutine\defer;
+
 /**
  * @mixin \Memcached
  */
@@ -39,6 +41,8 @@ class Memcached
             // Release connection.
             if (! $hasContextConnection) {
                 // Should storage the connection to coroutine context, then use defer() to release the connection.
+                // 注意：defer() 在 Hyperf 3.x 位于 Hyperf\Coroutine 命名空间（2.x 为 Hyperf\Utils\defer），
+                // 必须显式 use function 导入，否则未限定调用会因找不到全局函数而报错。
                 Context::set($this->getContextKey(), $connection);
                 defer(function () use ($connection) {
                     Context::set($this->getContextKey(), null);
