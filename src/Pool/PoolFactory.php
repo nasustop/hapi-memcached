@@ -9,6 +9,7 @@ declare(strict_types=1);
  * @contact  xupengfei@xupengfei.net
  * @license  https://github.com/nasustop/hapi-memcached/blob/master/LICENSE
  */
+
 namespace Nasustop\HapiMemcached\Pool;
 
 use Hyperf\Di\Container;
@@ -21,9 +22,7 @@ class PoolFactory
      */
     protected array $pools = [];
 
-    public function __construct(protected ContainerInterface $container)
-    {
-    }
+    public function __construct(protected ContainerInterface $container) {}
 
     public function getPool(string $name): MemcachedPool
     {

@@ -9,6 +9,7 @@ declare(strict_types=1);
  * @contact  xupengfei@xupengfei.net
  * @license  https://github.com/nasustop/hapi-memcached/blob/master/LICENSE
  */
+
 namespace Nasustop\HapiMemcached;
 
 use Hyperf\Context\Context;
@@ -22,9 +23,7 @@ class Memcached
 {
     protected string $poolName = 'default';
 
-    public function __construct(protected PoolFactory $factory)
-    {
-    }
+    public function __construct(protected PoolFactory $factory) {}
 
     public function __call($name, $arguments)
     {

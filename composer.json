@@ -2,7 +2,7 @@
     "name": "nasustop/hapi-memcached",
     "type": "library",
     "license": "MIT",
-    "version": "3.0.6",
+    "version": "3.0.7",
     "keywords": [
         "php",
         "hyperf",
@@ -45,7 +45,10 @@
     "prefer-stable": true,
     "config": {
         "optimize-autoloader": true,
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "php": "8.2.0"
+        }
     },
     "scripts": {
         "test": "phpunit -c phpunit.xml --colors=always",
