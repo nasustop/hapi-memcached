@@ -3,17 +3,18 @@ name: PHPUnit
 on: [ push, pull_request ]
 
 env:
-  SWOOLE_VERSION: '5.0.0'
-  SWOW_VERSION: 'develop'
+  SWOOLE_VERSION: '6.2.6'
+  SWOW_VERSION: 'v2.0.0'
 
 jobs:
   ci:
     name: Test PHP ${{ matrix.php-version }} on ${{ matrix.engine }}
     runs-on: "${{ matrix.os }}"
     strategy:
+      fail-fast: false
       matrix:
         os: [ ubuntu-latest ]
-        php-version: [ '8.0', '8.1' ]
+        php-version: [ '8.2', '8.3', '8.4' ]
         engine: [ 'none', 'swoole', 'swow' ]
       max-parallel: 5
     steps:
